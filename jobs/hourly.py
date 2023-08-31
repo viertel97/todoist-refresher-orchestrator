@@ -31,6 +31,11 @@ def add_jobs(scheduler):
         id="todoist_to_rethink_routine",
     )
     scheduler.add_job(
+        lambda: trigger_job(ROUTER_NAME, "todoist_to_work_routine"),
+        CronTrigger.from_crontab("15 */1 * * *"),
+        id="todoist_to_work_routine",
+    )
+    scheduler.add_job(
         lambda: trigger_job(ROUTER_NAME, "clean_inbox_activities_routine"),
         CronTrigger.from_crontab("40 */3 * * *"),
         id="clean_inbox_activities_routine",

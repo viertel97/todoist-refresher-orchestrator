@@ -59,10 +59,10 @@ def add_jobs(scheduler):
     scheduler.add_job(
         lambda: trigger_job(ROUTER_NAME, "stretch_tpt"),
         CronTrigger.from_crontab("5 1 * * *"),
-        id="notion_habit_tracker_stack",
+        id="stretch_tpt",
     )
     scheduler.add_job(
         lambda: trigger_job(ROUTER_NAME, "stretch_articles"),
         CronTrigger.from_crontab("10 1 * * *"),
-        id="notion_habit_tracker_stack",
+        id="stretch_articles",
     )

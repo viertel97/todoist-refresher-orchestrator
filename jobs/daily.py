@@ -66,3 +66,8 @@ def add_jobs(scheduler):
         CronTrigger.from_crontab("10 1 * * *"),
         id="stretch_articles",
     )
+    scheduler.add_job(
+        lambda: trigger_job(ROUTER_NAME, "article_to_audio_routine"),
+        CronTrigger.from_crontab("0 2 * * *"),
+        id="article_to_audio_routine",
+    )

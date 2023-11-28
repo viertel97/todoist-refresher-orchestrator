@@ -8,10 +8,6 @@ parameters:
 - name: repository # name of the parameter; required
   type: string # data type of the parameter; required
 
-variables:
-- group: common
-- name: PAT
-
 stages:
 - stage: Docker
   displayName: Build and Push Docker Image

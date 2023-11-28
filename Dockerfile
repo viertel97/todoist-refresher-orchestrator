@@ -1,6 +1,6 @@
 FROM python:3.9-slim-buster
 
-RUN apt-get update && apt-get upgrade -y && apt-get install -y git
+RUN apt-get update && apt-get upgrade -y && apt-get install -y procps
 
 COPY . .
 

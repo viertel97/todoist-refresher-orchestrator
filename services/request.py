@@ -10,7 +10,7 @@ logger = setup_logging(__file__)
 IS_DOCKER = os.getenv("IS_DOCKER", "False") == "True"
 
 if IS_DOCKER:
-    API_IP = "http://todoist-refresher-api.default.svc.cluster.local/"
+    API_IP = "http://todoist-refresher-api.default.svc.cluster.local:9100/"
 else:
     IP = "localhost" if platform == "darwin" or platform == "win32" else "192.168.178.100"
     API_IP = "http://" + IP + ":9100/"

@@ -7,9 +7,9 @@ from services.telegram_service import send_to_telegram
 
 logger = setup_logging(__file__)
 
-IS_DOCKER = os.getenv("IS_DOCKER", "False") == "True"
+IS_CONTAINER = os.getenv("IS_CONTAINER", "False") == "True"
 
-if IS_DOCKER:
+if IS_CONTAINER:
     API_IP = "http://todoist-refresher-api.default.svc.cluster.local:9100/"
 else:
     IP = "localhost" if platform == "darwin" or platform == "win32" else "192.168.178.100"

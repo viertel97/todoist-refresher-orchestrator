@@ -6,6 +6,10 @@ trigger:
 resources:
 - repo: self
 
+variables:
+- group: common
+
+
 extends:
   template: pipeline-template.yaml
   parameters:

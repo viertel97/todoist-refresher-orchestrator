@@ -1,4 +1,4 @@
-# Default values for cd.
+# Default values for todoist-refresher-orchestrator.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -64,8 +64,6 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-nodeSelector:
-  kubernetes.io/hostname: "ubuntu-server"
 
 tolerations: []
 

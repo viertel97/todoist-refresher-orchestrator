@@ -27,6 +27,11 @@ def add_jobs(scheduler):
         id="tpt",
     )
     scheduler.add_job(
+        lambda: trigger_job(ROUTER_NAME, "mm"),
+        CronTrigger.from_crontab("10 19 * * sun"),
+        id="mm",
+    )
+    scheduler.add_job(
         lambda: trigger_job(ROUTER_NAME, "ght_update"),
         CronTrigger.from_crontab("58 23 * * sun"),
         id="ght_update",

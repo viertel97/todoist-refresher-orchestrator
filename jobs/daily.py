@@ -76,3 +76,8 @@ def add_jobs(scheduler):
         CronTrigger.from_crontab("0 2 * * *"),
         id="article_to_audio_routine",
     )
+    scheduler.add_job(
+        lambda: trigger_job(ROUTER_NAME, "order_shopping_list_categories"),
+        CronTrigger.from_crontab("0 4 * * *"),
+        id="order_shopping_list_categories",
+    )

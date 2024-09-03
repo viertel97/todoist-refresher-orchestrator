@@ -41,4 +41,4 @@ def trigger_job(router, job_id):
                 time.sleep(WAIT_TIME)
             else:
                 send_to_telegram(f"Attempt for URL {url} failed: {e}. No more retries left.")
-                raise  # Re-raise the exception if all retries fail
+                logger.error(f"Attempt for URL {url} failed: {e}. No more retries left.")

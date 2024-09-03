@@ -3,7 +3,8 @@ import os
 import requests as requests
 from quarter_lib.logging import setup_logging
 import time
-from services.telegram_service import send_to_telegram
+
+from proxies.telegram_proxy import log_to_telegram
 
 logger = setup_logging(__file__)
 
@@ -20,7 +21,7 @@ logger.info("API_IP: " + API_IP)
 RETRIES = 5
 WAIT_TIME = 10
 
-async def trigger_job(router, job_id):
+def trigger_job(router, job_id):
     url = API_IP + router + "/" + job_id
 
     for attempt in range(RETRIES):
@@ -35,9 +36,7 @@ async def trigger_job(router, job_id):
             return response.json()  # Return the response if successful
         except requests.exceptions.RequestException as e:
             if attempt < RETRIES - 1:  # Only wait if there are retries left
-                logger.error(f"Attempt for URL {url} failed: {e}. Retrying in {WAIT_TIME} seconds.")
-                await send_to_telegram(f"Attempt for URL {url} failed: {e}. Retrying in {WAIT_TIME} seconds.")
+                log_to_telegram(f"Attempt for URL {url} failed: {e}. Retrying in {WAIT_TIME} seconds.", logger.error)
                 time.sleep(WAIT_TIME)
             else:
-                logger.error(f"Attempt for URL {url} failed: {e}. No more retries left.")
-                await send_to_telegram(f"Attempt for URL {url} failed: {e}. No more retries left.")
+                log_to_telegram(f"Attempt for URL {url} failed: {e}. No more retries left.", logger.critical)

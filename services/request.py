@@ -26,13 +26,14 @@ def trigger_job(router, job_id):
 
     for attempt in range(RETRIES):
         try:
+            logger.info(f"Attempting to trigger job of Router {router} with ID {job_id} at URL: {url}")
             response = requests.post(url)
             response.raise_for_status()  # Check if the request was successful
             try:
                 result_json = response.json()
             except Exception as e:
                 result_json = response
-            logger.info(f"Response for URL {url}: {result_json}")
+            logger.info(f"Positive response for URL {url} with content: {result_json}")
             return response.json()  # Return the response if successful
         except requests.exceptions.RequestException as e:
             if attempt < RETRIES - 1:  # Only wait if there are retries left

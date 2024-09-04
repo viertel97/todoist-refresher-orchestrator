@@ -34,6 +34,8 @@ def trigger_job(router, job_id):
             except Exception as e:
                 result_json = response
             logger.info(f"Positive response for URL {url} with content: {result_json}")
+            if attempt > 0:
+                log_to_telegram(f"Attempt for URL {url} was successful after {attempt} retries.", logger.info)
             return response.json()  # Return the response if successful
         except requests.exceptions.RequestException as e:
             if attempt < RETRIES - 1:  # Only wait if there are retries left

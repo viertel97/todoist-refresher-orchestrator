@@ -2,11 +2,10 @@ from sys import platform
 
 from apscheduler.schedulers.blocking import BlockingScheduler
 from quarter_lib.logging import setup_logging
+from tzlocal import get_localzone
 
 from jobs.all_jobs import add_all_jobs
 from services.request import trigger_job
-
-from tzlocal import get_localzone
 
 tz = get_localzone()
 
@@ -15,7 +14,7 @@ logger = setup_logging(__file__)
 
 def main():
     logger.info("Platform: " + str(platform))
-    if not (platform == "darwin" or platform == "win32"):
+    if platform == "darwin" or platform == "win32":
         trigger_job("hourly", "clean_inbox_activities_routine")
         logger.info("test")
     else:

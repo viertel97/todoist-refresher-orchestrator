@@ -6,17 +6,21 @@ from quarter_lib.logging import setup_logging
 from jobs.all_jobs import add_all_jobs
 from services.request import trigger_job
 
+from tzlocal import get_localzone
+
+tz = get_localzone()
+
 logger = setup_logging(__file__)
 
 
 def main():
-    print(platform)
-    if (platform == "darwin" or platform == "win32"):
+    logger.info("Platform: " + str(platform))
+    if not (platform == "darwin" or platform == "win32"):
         trigger_job("hourly", "clean_inbox_activities_routine")
-        print("test")
+        logger.info("test")
     else:
-
-        scheduler = BlockingScheduler()
+        logger.info("Timezone: " + str(tz))
+        scheduler = BlockingScheduler(timezone=tz)
 
         scheduler = add_all_jobs(scheduler)
 

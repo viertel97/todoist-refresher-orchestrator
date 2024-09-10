@@ -12,7 +12,7 @@ logger = setup_logging(__file__)
 
 def main():
     logger.info("Platform: " + str(platform))
-    if not(platform == "darwin" or platform == "win32"):
+    if platform == "darwin" or platform == "win32":
         trigger_job("hourly", "clean_inbox_activities_routine")
         logger.info("test")
     else:

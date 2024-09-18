@@ -36,3 +36,7 @@ def add_jobs(scheduler):
         CronTrigger.from_crontab("58 23 * * sun"),
         id="ght_update",
     )
+
+    scheduler.remove_job("tpt")
+    scheduler.remove_job("mm")
+

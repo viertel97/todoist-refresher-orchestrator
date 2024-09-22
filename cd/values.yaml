@@ -4,6 +4,8 @@
 
 replicaCount: 1
 
+timezone: "Europe/Berlin"
+
 image:
   repository: ghcr.io/viertel97/todoist-refresher-orchestrator
   pullPolicy: Always

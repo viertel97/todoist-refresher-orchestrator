@@ -44,6 +44,8 @@ spec:
                 secretKeyRef:
                   name: akeyless-secret
                   key: access_key
+            - name: TZ
+              value: "{{ .Values.timezone }}"
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
@@ -56,6 +58,15 @@ spec:
               - ps aux | grep main.py | grep -v grep
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - mountPath: /etc/localtime
+              name: tz-config
+              readOnly: true
+      volumes:
+        - name: tz-config
+          hostPath:
+            path: /usr/share/zoneinfo/{{ .Values.timezone }}
+            type: File
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

@@ -1,5 +1,5 @@
 from sys import platform
-
+from pytz import timezone
 from apscheduler.schedulers.blocking import BlockingScheduler
 from quarter_lib.logging import setup_logging
 
@@ -16,7 +16,7 @@ def main():
         trigger_job("hourly", "clean_inbox_activities_routine")
         logger.info("test")
     else:
-        scheduler = BlockingScheduler(timezone="Europe/Berlin")
+        scheduler = BlockingScheduler(timezone=timezone("Europe/Berlin"))
         logger.info("Timezone: " + str(scheduler.timezone))
         scheduler = add_all_jobs(scheduler)
 

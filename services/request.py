@@ -1,8 +1,9 @@
-import platform
 import os
+import platform
+import time
+
 import requests as requests
 from quarter_lib.logging import setup_logging
-import time
 
 from proxies.telegram_proxy import log_to_telegram
 
@@ -37,7 +38,7 @@ def trigger_job(router, job_id):
             if attempt > 0:
                 log_to_telegram(f"Attempt for URL {url} was successful after {attempt} retries.", logger.info)
             return response.json()  # Return the response if successful
-        except requests.exceptions.RequestException as e:
+        except Exception as e:
             if attempt < RETRIES - 1:  # Only wait if there are retries left
                 log_to_telegram(f"Attempt for URL {url} failed: {e}. Retrying in {WAIT_TIME} seconds.", logger.error)
                 time.sleep(WAIT_TIME)

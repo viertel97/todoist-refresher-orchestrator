@@ -1,5 +1,6 @@
 from apscheduler.triggers.cron import CronTrigger
 from quarter_lib.logging import setup_logging
+
 from services.request import trigger_job
 
 logger = setup_logging(__name__)
@@ -9,11 +10,15 @@ ROUTER_NAME = "bi_weekly"
 
 def add_jobs(scheduler):
     scheduler.add_job(
-        lambda: trigger_job(ROUTER_NAME, "update_book_rework"),
+        lambda: trigger_job(ROUTER_NAME, "update_book_rework_unweighted"),
         CronTrigger.from_crontab("57 23 1,5,9,13,17,21,25,29 * *"),
-        id="update_book_rework"
+        id="update_book_rework_unweighted"
     )
-
+    scheduler.add_job(
+        lambda: trigger_job(ROUTER_NAME, "update_book_rework_weighted"),
+        CronTrigger.from_crontab("57 23 3,7,11,15,19,23,27,31 * *"),
+        id="update_book_rework_weighted"
+    )
     scheduler.add_job(
         lambda: trigger_job(ROUTER_NAME, "update_to_think_about"),
         CronTrigger.from_crontab("54 23 3,19 * *"),

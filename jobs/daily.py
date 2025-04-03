@@ -28,12 +28,6 @@ def add_jobs(scheduler):
     )
 
     scheduler.add_job(
-        lambda: trigger_job(ROUTER_NAME, "monica_before_tasks/1"),
-        CronTrigger.from_crontab("55 23 * * *"),
-        id="monica_for_following_days",
-    )
-
-    scheduler.add_job(
         lambda: trigger_job(ROUTER_NAME, "update_monica_archive"),
         CronTrigger.from_crontab("45 23 * * *"),
         id="update_monica_archive",

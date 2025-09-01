@@ -28,6 +28,12 @@ def add_jobs(scheduler):
     )
 
     scheduler.add_job(
+        lambda: trigger_job(ROUTER_NAME, "distance-events"),
+        CronTrigger.from_crontab("15 6 * * *"),
+        id="distance-events",
+    )
+
+    scheduler.add_job(
         lambda: trigger_job(ROUTER_NAME, "update_monica_archive"),
         CronTrigger.from_crontab("45 23 * * *"),
         id="update_monica_archive",
@@ -36,7 +42,7 @@ def add_jobs(scheduler):
 
     scheduler.add_job(
         lambda: trigger_job(ROUTER_NAME, "update_notion_habit_tracker"),
-        CronTrigger.from_crontab("0 7 * * *"),
+        CronTrigger.from_crontab("30 6 * * *"),
         id="update_notion_habit_tracker",
     )
 

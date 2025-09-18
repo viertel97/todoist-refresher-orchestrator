@@ -97,3 +97,9 @@ def add_jobs(scheduler):
         CronTrigger.from_crontab("0 15 * * *"),
         id="daily_cubox_reading_routine_unweighted",
     )
+
+    scheduler.add_job(
+        lambda: trigger_job(ROUTER_NAME, "stretch_lists"),
+        CronTrigger.from_crontab("5 2 * * *"),
+        id="stretch_tpt",
+    )

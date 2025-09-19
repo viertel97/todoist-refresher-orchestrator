@@ -101,5 +101,5 @@ def add_jobs(scheduler):
     scheduler.add_job(
         lambda: trigger_job(ROUTER_NAME, "stretch_lists"),
         CronTrigger.from_crontab("5 2 * * *"),
-        id="stretch_tpt",
+        id="stretch_lists",
     )

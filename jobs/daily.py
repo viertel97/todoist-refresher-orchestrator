@@ -28,7 +28,7 @@ def add_jobs(scheduler):
     )
 
     scheduler.add_job(
-        lambda: trigger_job(ROUTER_NAME, "distance-events/0"),
+        lambda: trigger_job(ROUTER_NAME, "/distance-events?days=0"),
         CronTrigger.from_crontab("15 3 * * *"),
         id="distance-events",
     )

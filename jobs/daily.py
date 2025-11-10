@@ -103,3 +103,9 @@ def add_jobs(scheduler):
         CronTrigger.from_crontab("5 2 * * *"),
         id="stretch_lists",
     )
+
+    scheduler.add_job(
+        lambda: trigger_job(ROUTER_NAME, "fill_freezer_db"),
+        CronTrigger.from_crontab("35 1-23 * * *"),
+        id="fill_freezer_db",
+    )

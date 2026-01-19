@@ -87,16 +87,16 @@ def add_jobs(scheduler):
         CronTrigger.from_crontab("0 4 * * *"),
         id="daily_cubox_to_obsidian_routine",
     )
-    scheduler.add_job(
-        lambda : trigger_job(ROUTER_NAME, "daily_cubox_reading_routine_weighted"),
-        CronTrigger.from_crontab("0 3 * * *"),
-        id="daily_cubox_reading_routine_weighted",
-    )
-    scheduler.add_job(
-        lambda : trigger_job(ROUTER_NAME, "daily_cubox_reading_routine_unweighted"),
-        CronTrigger.from_crontab("0 15 * * *"),
-        id="daily_cubox_reading_routine_unweighted",
-    )
+    #scheduler.add_job(
+    #    lambda : trigger_job(ROUTER_NAME, "daily_cubox_reading_routine_weighted"),
+    #    CronTrigger.from_crontab("0 3 * * *"),
+    #    id="daily_cubox_reading_routine_weighted",
+    #)
+    #scheduler.add_job(
+    #    lambda : trigger_job(ROUTER_NAME, "daily_cubox_reading_routine_unweighted"),
+    #    CronTrigger.from_crontab("0 15 * * *"),
+    #    id="daily_cubox_reading_routine_unweighted",
+    #)
 
     scheduler.add_job(
         lambda: trigger_job(ROUTER_NAME, "stretch_lists"),
